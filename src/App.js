@@ -2,19 +2,22 @@ import React from 'react';
 import './App.css';
 
 import Header from './components/Header/Header';
-import ParkingForm from './components/ParkingForm/ParkingForm';
-import ParkingSlots from "./components/ParkingSlots/ParkingSlots";
-import Vehicle from "./components/Vehicles/Vehicle";
+import ParkingInput from './components/ParkingForm/ParkingInput';
+import ParkingSlotList from "./components/ParkingSlots/ParkingSlotList";
+import Vehicle from "./components/Vehicle/Vehicle";
+import ParkingSlotsProvider from "./store/ParkingSlotsProvider";
 
-function App() {
-  return (
-    <div>
-      <Header />
-      <ParkingForm />
-      <ParkingSlots />
-      <Vehicle />
-    </div>
-  );
-}
+const App = () => {
+    return(
+        <ParkingSlotsProvider>
+            <Header />
+            <main>
+                <ParkingInput />
+                <ParkingSlotList  />
+                <Vehicle />
+            </main>
+        </ParkingSlotsProvider>
+    );
+};
 
 export default App;

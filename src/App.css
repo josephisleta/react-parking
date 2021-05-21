@@ -1,0 +1,107 @@
+.header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 5rem;
+    background-color: #0f738a;
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 10%;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
+    z-index: 10;
+}
+
+.header-image {
+    width: 100%;
+    height: 20rem;
+    z-index: 0;
+    overflow: hidden;
+}
+
+.header-image img {
+    width: 110%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.parking-slot-list {
+    max-width: 90rem;
+    width: 90%;
+    margin: 2rem auto;
+}
+
+.parking-slot-list ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.parking-slot {
+    display: flex;
+    justify-content: space-between;
+    margin: 1rem;
+    padding-bottom: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+}
+
+.parking-slot h3 {
+    margin: 0 0 0.25rem 0;
+}
+
+.form {
+    max-width: 90rem;
+    width: 90%;
+    margin: 2rem auto;
+}
+
+.form button {
+    font: inherit;
+    cursor: pointer;
+    background-color: #248a48;
+    border: 1px solid #248a48;
+    color: white;
+    padding: 0.25rem 2rem;
+    border-radius: 20px;
+    font-weight: bold;
+}
+
+.form button:hover,
+.form button:active {
+    background-color: #00642d;
+    border-color: #00642d;
+}
+
+.form-container.card {
+    padding: 40px;
+}
+
+.input {
+    display: flex;
+    align-items: center;
+    margin-bottom: 0.5rem;
+}
+
+.input label {
+    font-weight: bold;
+    margin-right: 1rem;
+}
+
+.input input {
+    width: 20rem;
+    height: 2rem;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    font: inherit;
+    padding-left: 0.5rem;
+}
+
+.card {
+    padding: 1rem;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
+    border-radius: 14px;
+    background-color: white;
+}
