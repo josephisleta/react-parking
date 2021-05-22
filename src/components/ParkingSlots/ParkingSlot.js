@@ -12,31 +12,31 @@ const ParkingSlot = (props) => {
     };
 
     return (
-        <li className="parking-slot">
-            <span>
-                ID: {props.id}
-            </span>
-            <p>
-                Type: {props.type}
-            </p>
-            <span>
-                Distance Points{props.distancePoints}
-            </span>
-            <span>
-                Is Available{props.isAvailable}
-            </span>
+        <li className={`parking-slot-${props.type}`}>
+            <div className="parking-slot-header">
+                <span>
+                    {props.id}
+                </span>
+                <span className={"dot " + (props.isAvailable === '1' ? 'green' : 'red')}>
+                </span>
+            </div>
 
-            {props.vehicle && <Vehicle
+            {props.vehicle && props.parkingSlip && <Vehicle
                 plateNumber={props.vehicle.plateNumber}
                 type={props.vehicle.type}
                 color={props.vehicle.color}
+                entryTime={props.parkingSlip.entryTime}
                 onExit={exitHandler}
             />}
 
-            {props.parkingSlip && <div>
-                Parking Slip
-                <span>{props.parkingSlip.entryTime}</span>
-            </div>}
+            <div className="parking-slot-footer">
+                <span>
+                    {props.type}
+                </span>
+                <span>
+                    Distance {props.distancePoints}
+                </span>
+            </div>
         </li>
     );
 };

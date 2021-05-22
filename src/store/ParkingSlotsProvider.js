@@ -54,9 +54,15 @@ const ParkingSlotsProvider = (props) => {
         }
 
         if (action.type === 'UPDATE') {
+
+            let totalParkedVehicles = 0;
+            for (let i of action.data.parkingSlots) {
+                if (i.vehicle) totalParkedVehicles++;
+            }
+
             return {
                 parkingSlots: action.data.parkingSlots,
-                totalParkedVehicles: action.data.parkingSlots.length
+                totalParkedVehicles: totalParkedVehicles
             };
         }
 

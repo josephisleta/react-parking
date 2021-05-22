@@ -31,9 +31,9 @@ const ParkingInput = (props) => {
    return (
        <form className="form">
             <Card>
-                <div className="input">
+                <div className="input entry-point-container">
                     <label htmlFor='entry-point'>Entry Point</label>
-                    <select name="entry-point" id="entry-point" ref={entryPointInputRef}>
+                    <select id="entry-point" name="entry-point" className="entry-point-select" ref={entryPointInputRef}>
                         <option value="1">1</option>
                         <option value="2">2</option>
                         <option value="3">3</option>
@@ -43,23 +43,22 @@ const ParkingInput = (props) => {
                 <div className="input">
                     <label htmlFor='plate-number'>Plate number</label>
                     <input id='plate-number' type='text' name='plate-number' ref={plateNumberInputRef} />
-                </div>
 
-                <div className="input">
                     <label htmlFor='type'>Type</label>
                     <select name="type" id="type" ref={typeInputRef}>
                         <option value="S">S</option>
                         <option value="M">M</option>
                         <option value="L">L</option>
                     </select>
-                </div>
 
-                <div className="input">
                     <label htmlFor='color'>Color</label>
                     <input id='color' type='text' name='color' ref={colorInputRef} />
                 </div>
 
-                <button type='submit' onClick={onSubmitHandler}>Add</button>
+                <div className="button-container">
+                    <button type='submit' onClick={onSubmitHandler}>Add</button>
+                </div>
+
             </Card>
        </form>
    );

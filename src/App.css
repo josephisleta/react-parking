@@ -27,29 +27,97 @@
     object-fit: cover;
 }
 
-.parking-slot-list {
+.parking-slot-header {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.parking-slot-footer {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.parking-slot-container {
     max-width: 90rem;
     width: 90%;
     margin: 2rem auto;
 }
 
-.parking-slot-list ul {
+.parking-slot-container ul {
     list-style: none;
     margin: 0;
     padding: 0;
 }
 
-.parking-slot {
+.parking-slot-list {
     display: flex;
-    justify-content: space-between;
+    flex-wrap: wrap;
     margin: 1rem;
     padding-bottom: 1rem;
-    border: 1px solid #ccc;
     border-radius: 8px;
 }
 
-.parking-slot h3 {
+.parking-slot-list h3 {
     margin: 0 0 0.25rem 0;
+}
+
+.parking-slot-SP {
+    border: 3px solid black;
+    width: 15%;
+    min-height: 10rem;
+    padding: 8px;
+    margin-bottom: 15px;
+}
+
+.parking-slot-MP {
+    border: 3px solid black;
+    width: 20%;
+    min-height: 10rem;
+    padding: 8px;
+    margin-bottom: 15px;
+}
+
+.parking-slot-LP {
+    border: 3px solid black;
+    width: 25%;
+    min-height: 10rem;
+    padding: 8px;
+    margin-bottom: 15px;
+}
+
+.vehicle-container {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 8px;
+}
+
+.vehicle-header {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+}
+
+.vehicle-info {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+}
+
+.vehicle-S {
+    width: 10rem;
+    background-color: darkgray;
+}
+
+.vehicle-M {
+    width: 15rem;
+    background-color: darkgray;
+}
+
+.vehicle-L {
+    width: 20rem;
+    background-color: darkgray;
 }
 
 .form {
@@ -61,47 +129,134 @@
 .form button {
     font: inherit;
     cursor: pointer;
-    background-color: #248a48;
-    border: 1px solid #248a48;
+    background-color: dodgerblue;
+    border: 1px solid dodgerblue;
     color: white;
     padding: 0.25rem 2rem;
     border-radius: 20px;
     font-weight: bold;
+    width: 50%;
+    height: 4rem;
+    margin-top: 0.5rem;
 }
 
 .form button:hover,
 .form button:active {
-    background-color: #00642d;
-    border-color: #00642d;
+    background-color: #1e6ad0;
+    border-color: #1e6ad0;
 }
 
 .form-container.card {
-    padding: 40px;
+    padding: 20px 40px 20px 40px;
+}
+
+button.car-icon {
+    font: inherit;
+    cursor: pointer;
+    background-color: #ffffff;
+    border-radius: 20px;
+    font-weight: bold;
+    min-width: 8%;
+    height: 3rem;
+    display: flex;
+    justify-content: space-around;
+    transition: transform .1s;
+}
+
+button.car-icon:hover,
+button.car-icon:active {
+    transform: scale(1.1);
+}
+
+button.car-icon img {
+    height: 40px;
+    border-radius: 50%;
+}
+
+button.car-icon .quantity {
+    margin: 6px;
+    font-size: 25px;
+}
+
+button.exit {
+    font: inherit;
+    cursor: pointer;
+    color: white;
+    border-radius: 25%;
+    border: 1px solid;
+    font-weight: bold;
+    width: 25px;
+    height: 25px;
+    padding: 0;
+    transition: transform .2s;
+}
+
+button.exit:hover {
+    transform: scale(1.5);
+}
+
+button.exit img{
+    height: 23px;
+    border-radius: 50%;
 }
 
 .input {
     display: flex;
     align-items: center;
-    margin-bottom: 0.5rem;
+    margin-bottom: 1rem;
+    font-size: 20px;
 }
 
 .input label {
-    font-weight: bold;
     margin-right: 1rem;
 }
 
-.input input {
+.input input, .input select {
     width: 20rem;
-    height: 2rem;
+    height: 4rem;
     border-radius: 5px;
     border: 1px solid #ccc;
     font: inherit;
     padding-left: 0.5rem;
+    margin-right: 2rem;
+}
+
+.input select {
+    width: 7rem;
 }
 
 .card {
     padding: 1rem;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
     border-radius: 14px;
-    background-color: white;
+}
+
+.entry-point-container {
+    font-weight: bold;
+}
+
+.entry-point-container .entry-point-select {
+    font-size: 50px;
+    width: 100px;
+    height: 80px;
+}
+
+.dot {
+    height: 25px;
+    width: 25px;
+    border-radius: 50%;
+    display: inline-block;
+}
+
+.red {
+    background-color: #ff0000a1;
+}
+
+.green {
+    background-color: #00a10099;
+}
+
+.button-container {
+    display: flex;
+    justify-content: center;
 }

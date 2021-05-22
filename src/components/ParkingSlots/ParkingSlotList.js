@@ -9,9 +9,9 @@ const ParkingSlotList = (props) => {
     const parkingSlotsContext = useContext(ParkingSlotsContext);
 
     return (
-        <section className="parking-slot-list">
+        <section className="parking-slot-container">
             <Card>
-                <ul>
+                <ul className="parking-slot-list">
                     {parkingSlotsContext.parkingSlots.map((parkingSlot) => (
                         <ParkingSlot
                             key={parkingSlot.id}
