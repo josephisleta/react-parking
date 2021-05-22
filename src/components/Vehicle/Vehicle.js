@@ -1,9 +1,14 @@
 import React from 'react';
 
-const Vehicle = () => {
+const Vehicle = (props) => {
     return (
-        <div>
-            This is the vehicle
+        <div className="card">
+            Vehicle
+            <span>{props.plateNumber}</span>
+            <span>{props.type}</span>
+            <span>{props.color}</span>
+
+            <button type="button" onClick={props.onExit}>x</button>
         </div>
     );
 };

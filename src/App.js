@@ -4,7 +4,6 @@ import './App.css';
 import Header from './components/Header/Header';
 import ParkingInput from './components/ParkingForm/ParkingInput';
 import ParkingSlotList from "./components/ParkingSlots/ParkingSlotList";
-import Vehicle from "./components/Vehicle/Vehicle";
 import ParkingSlotsProvider from "./store/ParkingSlotsProvider";
 
 const App = () => {
@@ -14,7 +13,6 @@ const App = () => {
             <main>
                 <ParkingInput />
                 <ParkingSlotList  />
-                <Vehicle />
             </main>
         </ParkingSlotsProvider>
     );

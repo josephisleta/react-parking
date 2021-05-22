@@ -14,11 +14,13 @@ const ParkingSlotList = (props) => {
                 <ul>
                     {parkingSlotsContext.parkingSlots.map((parkingSlot) => (
                         <ParkingSlot
-                            key={parkingSlot.plateNumber}
-                            entryPoint={parkingSlot.entryPoint}
-                            plateNumber={parkingSlot.plateNumber}
+                            key={parkingSlot.id}
+                            id={parkingSlot.id}
                             type={parkingSlot.type}
-                            color={parkingSlot.color}
+                            distancePoints={parkingSlot.distancePoints}
+                            isAvailable={parkingSlot.isAvailable}
+                            vehicle={parkingSlot.vehicle}
+                            parkingSlip={parkingSlot.parkingSlip}
                         />
                     ))}
                 </ul>

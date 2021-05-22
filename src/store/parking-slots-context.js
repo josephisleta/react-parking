@@ -3,7 +3,7 @@ import React from 'react';
 const ParkingSlotsContext = React.createContext({
     parkingSlots: [],
     totalParkedVehicles: 0,
-    enter: (entryPoint, plateNumber, type, color) => {},
+    enter: (data) => {},
     exit: (parkingSlotId) => {}
 });
 

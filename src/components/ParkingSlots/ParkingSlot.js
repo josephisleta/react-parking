@@ -1,30 +1,42 @@
 import React, { useContext } from 'react';
 
 import ParkingSlotsContext from "../../store/parking-slots-context";
+import Vehicle from "../Vehicle/Vehicle";
 
 const ParkingSlot = (props) => {
 
     const parkingSlotsContext = useContext(ParkingSlotsContext);
 
     const exitHandler = (event) => {
-        parkingSlotsContext.exit(props.plateNumber);
+        parkingSlotsContext.exit(props.id);
     };
 
     return (
         <li className="parking-slot">
             <span>
-                {props.entryPoint}
+                ID: {props.id}
             </span>
             <p>
-                {props.plateNumber}
+                Type: {props.type}
             </p>
             <span>
-                {props.type}
+                Distance Points{props.distancePoints}
             </span>
             <span>
-                {props.color}
+                Is Available{props.isAvailable}
             </span>
-            <button type="button" onClick={exitHandler}>x</button>
+
+            {props.vehicle && <Vehicle
+                plateNumber={props.vehicle.plateNumber}
+                type={props.vehicle.type}
+                color={props.vehicle.color}
+                onExit={exitHandler}
+            />}
+
+            {props.parkingSlip && <div>
+                Parking Slip
+                <span>{props.parkingSlip.entryTime}</span>
+            </div>}
         </li>
     );
 };

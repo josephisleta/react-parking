@@ -1,4 +1,4 @@
-import React, { useReducer } from 'react';
+import React, { useReducer, useEffect } from 'react';
 import ParkingSlotsContext from "./parking-slots-context";
 
 const defaultParkingSlotsState = {
@@ -6,40 +6,66 @@ const defaultParkingSlotsState = {
     totalParkedVehicles: 0,
 };
 
-const parkingSlotsReducer = (state, action) => {
-    if (action.type === 'ENTER') {
-
-        // TODO api call on /api/parking/enter
-
-        let newParkingSlots = [
-            ...state.parkingSlots,
-            action.data
-        ];
-
-        return {
-            parkingSlots: newParkingSlots,
-            totalParkedVehicles: state.totalParkedVehicles + 1
-        };
-    }
-
-    if (action.type === 'EXIT') {
-
-        // TODO api call on /api/parking/exit
-
-        let newParkingSlots = state.parkingSlots.filter((parkingSlot) => {
-            return parkingSlot.plateNumber !== action.data.plateNumber
-        });
-
-        return {
-            parkingSlots: newParkingSlots,
-            totalParkedVehicles: state.totalParkedVehicles - 1
-        };
-    }
-
-    return defaultParkingSlotsState;
-};
-
 const ParkingSlotsProvider = (props) => {
+
+    const fetchParkingSlotsData = () => {
+        fetch('http://joseph.local/api/parking/slots').then((response) => {
+            return response.json()
+        }).then((data) => {
+            dispatchParkingSlotsState({
+                'type': 'UPDATE',
+                'data': data
+            });
+        });
+    };
+
+    const parkingSlotsReducer = (state, action) => {
+        if (action.type === 'ENTER') {
+
+            fetch('http://joseph.local/api/parking/enter', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded'
+                },
+                body: new URLSearchParams(action.data)
+            }).then((response) => {
+                return response.json()
+            }).then((data) => {
+                console.log(data);
+                fetchParkingSlotsData();
+            });
+
+        }
+
+        if (action.type === 'EXIT') {
+
+            fetch('http://joseph.local/api/parking/exit', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded'
+                },
+                body: new URLSearchParams(action.data)
+            }).then((response) => {
+                return response.json()
+            }).then((data) => {
+                console.log(data);
+                fetchParkingSlotsData();
+            });
+        }
+
+        if (action.type === 'UPDATE') {
+            return {
+                parkingSlots: action.data.parkingSlots,
+                totalParkedVehicles: action.data.parkingSlots.length
+            };
+        }
+
+        return defaultParkingSlotsState;
+    };
+
+    useEffect(() => {
+        fetchParkingSlotsData();
+    }, []);
 
     const [parkingSlotsState, dispatchParkingSlotsState] = useReducer(parkingSlotsReducer, defaultParkingSlotsState);
 
@@ -55,11 +81,11 @@ const ParkingSlotsProvider = (props) => {
         });
     };
 
-    const exitHandler = (plateNumber) => {
+    const exitHandler = (parkingSlotId) => {
         dispatchParkingSlotsState({
             'type': 'EXIT',
             'data': {
-                'plateNumber': plateNumber
+                'parkingSlotId': parkingSlotId
             }
         });
     };
