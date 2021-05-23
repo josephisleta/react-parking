@@ -1,11 +1,11 @@
-import React, { useContext } from 'react';
+import React, {useContext, useState} from 'react';
 import ParkingSlot from "./ParkingSlot";
 import Card from "../UI/Card";
 
 import ParkingSlotsContext from "../../store/parking-slots-context";
+import ParkingSlip from "../ParkingSlips/ParkingSlip";
 
-const ParkingSlotList = (props) => {
-
+const ParkingSlotList = () => {
     const parkingSlotsContext = useContext(ParkingSlotsContext);
 
     return (
@@ -25,6 +25,12 @@ const ParkingSlotList = (props) => {
                     ))}
                 </ul>
             </Card>
+
+            {parkingSlotsContext.parkingSlip.displayParkingSlip &&
+            <ParkingSlip
+                data={parkingSlotsContext.parkingSlip.parkingSlip}
+                onClose={parkingSlotsContext.toggleParkingSlip}
+            />}
         </section>
     );
 };

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './App.css';
 
 import Header from './components/Header/Header';
@@ -7,7 +7,7 @@ import ParkingSlotList from "./components/ParkingSlots/ParkingSlotList";
 import ParkingSlotsProvider from "./store/ParkingSlotsProvider";
 
 const App = () => {
-    return(
+    return (
         <ParkingSlotsProvider>
             <Header />
             <main>

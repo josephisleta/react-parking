@@ -1,15 +1,10 @@
-import React, { useReducer, useEffect } from 'react';
+import React, { useReducer, useEffect, useState } from 'react';
 import ParkingSlotsContext from "./parking-slots-context";
-
-const defaultParkingSlotsState = {
-    parkingSlots: [],
-    totalParkedVehicles: 0,
-};
 
 const ParkingSlotsProvider = (props) => {
 
-    const fetchParkingSlotsData = () => {
-        fetch('http://joseph.local/api/parking/slots').then((response) => {
+    const fetchParkingSlotsData = (entryPoint = 1) => {
+        fetch('http://joseph.local/api/parking?entryPoint=' + entryPoint).then((response) => {
             return response.json()
         }).then((data) => {
             dispatchParkingSlotsState({
@@ -17,6 +12,11 @@ const ParkingSlotsProvider = (props) => {
                 'data': data
             });
         });
+    };
+
+    const defaultParkingSlotsState = {
+        parkingSlots: [],
+        totalParkedVehicles: 0,
     };
 
     const parkingSlotsReducer = (state, action) => {
@@ -31,8 +31,7 @@ const ParkingSlotsProvider = (props) => {
             }).then((response) => {
                 return response.json()
             }).then((data) => {
-                console.log(data);
-                fetchParkingSlotsData();
+                fetchParkingSlotsData(entryPoint);
             });
 
         }
@@ -48,8 +47,10 @@ const ParkingSlotsProvider = (props) => {
             }).then((response) => {
                 return response.json()
             }).then((data) => {
-                console.log(data);
-                fetchParkingSlotsData();
+                dispatchParkingSlipState({
+                    'type': 'EXIT',
+                    'data': data
+                });
             });
         }
 
@@ -69,11 +70,34 @@ const ParkingSlotsProvider = (props) => {
         return defaultParkingSlotsState;
     };
 
-    useEffect(() => {
-        fetchParkingSlotsData();
-    }, []);
-
     const [parkingSlotsState, dispatchParkingSlotsState] = useReducer(parkingSlotsReducer, defaultParkingSlotsState);
+
+
+    const defaultParkingSlipState = {
+        parkingSlip: {},
+        displayParkingSlip: false,
+    };
+
+    const parkingSlipReducer = (state, action) => {
+
+        if (action.type === 'EXIT') {
+            return {
+                parkingSlip: action.data.parkingSlip,
+                displayParkingSlip: true
+            };
+        }
+
+        if (action.type === 'TOGGLE') {
+            return {
+                parkingSlip: {},
+                displayParkingSlip: !state.displayParkingSlip
+            };
+        }
+
+        return defaultParkingSlipState;
+    };
+
+    const [parkingSlipState, dispatchParkingSlipState] = useReducer(parkingSlipReducer, defaultParkingSlipState);
 
     const enterHandler = (data) => {
         dispatchParkingSlotsState({
@@ -96,11 +120,30 @@ const ParkingSlotsProvider = (props) => {
         });
     };
 
+    const updateEntryPointHandler = (entryPoint) => {
+        setEntryPoint(entryPoint);
+    };
+
+    const toggleParkingSlipHandler = () => {
+        dispatchParkingSlipState({
+            'type': 'TOGGLE'
+        });
+    };
+
+    const [entryPoint, setEntryPoint] = useState(1);
+
+    useEffect(() => {
+        fetchParkingSlotsData(entryPoint);
+    }, [parkingSlipState.parkingSlip, entryPoint]);
+
     const parkingSlotsContext = {
         parkingSlots: parkingSlotsState.parkingSlots,
         totalParkedVehicles: parkingSlotsState.totalParkedVehicles,
         enter: enterHandler,
-        exit: exitHandler
+        exit: exitHandler,
+        parkingSlip: parkingSlipState,
+        toggleParkingSlip: toggleParkingSlipHandler,
+        updateEntryPoint: updateEntryPointHandler
     };
 
     return (

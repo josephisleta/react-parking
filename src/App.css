@@ -150,6 +150,10 @@
     padding: 20px 40px 20px 40px;
 }
 
+.parking-slot-container .card.form-container {
+    min-height: 38rem;
+}
+
 button.car-icon {
     font: inherit;
     cursor: pointer;
@@ -259,4 +263,85 @@ button.exit img{
 .button-container {
     display: flex;
     justify-content: center;
+}
+
+.backdrop {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    z-index: 20;
+    background-color: rgba(0, 0, 0, 0.75);
+}
+
+.modal {
+    position: fixed;
+    top: 20vh;
+    left: 30%;
+    width: 40%;
+    background-color: white;
+    border-radius: 14px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
+    z-index: 30;
+    animation: slide-down 300ms ease-out forwards;
+}
+
+.modal .slip-header {
+    background: royalblue;
+    padding: 1rem;
+    border-radius: 14px 14px 0 0;
+}
+
+.modal .slip-header h2 {
+    margin: 0;
+    color: white;
+}
+
+.modal .slip-content {
+    padding: 1rem;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.modal .slip-content div {
+    min-width: 20%;
+    margin: 1rem;
+}
+
+.modal .slip-content div.date {
+    width: 100%;
+}
+
+.modal .slip-content div.fee {
+    min-width: 20%;
+    font-weight: bold;
+    font-size: 20px;
+}
+
+.modal .slip-actions {
+    padding: 1rem;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.modal button {
+    font: inherit;
+    border: 1px solid royalblue;
+    background: royalblue;
+    color: white;
+    padding: 0.25rem 1rem;
+    cursor: pointer;
+    height: 2.5rem;
+    width: 9rem;
+}
+
+.modal button:hover,
+.modal button:active {
+    background: #4e7fff;
+    border-color: #4e7fff;
+}
+
+.modal button:focus {
+    outline: none;
 }

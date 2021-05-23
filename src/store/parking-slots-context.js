@@ -4,7 +4,10 @@ const ParkingSlotsContext = React.createContext({
     parkingSlots: [],
     totalParkedVehicles: 0,
     enter: (data) => {},
-    exit: (parkingSlotId) => {}
+    exit: (parkingSlotId) => {},
+    parkingSlip: {},
+    toggleParkingSlip: () => {},
+    updateEntryPoint: () => {}
 });
 
 export default ParkingSlotsContext;

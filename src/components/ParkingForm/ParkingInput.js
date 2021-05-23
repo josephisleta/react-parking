@@ -3,7 +3,7 @@ import React, { useRef, useContext } from 'react';
 import Card from '../UI/Card';
 import ParkingSlotsContext from "../../store/parking-slots-context";
 
-const ParkingInput = (props) => {
+const ParkingInput = () => {
 
     const parkingSlotsContext = useContext(ParkingSlotsContext);
 
@@ -28,12 +28,16 @@ const ParkingInput = (props) => {
         colorInputRef.current.value = '';
     };
 
+    const updateEntryPointHandler = (event) => {
+        parkingSlotsContext.updateEntryPoint(entryPointInputRef.current.value);
+    };
+
    return (
        <form className="form">
             <Card>
                 <div className="input entry-point-container">
                     <label htmlFor='entry-point'>Entry Point</label>
-                    <select id="entry-point" name="entry-point" className="entry-point-select" ref={entryPointInputRef}>
+                    <select id="entry-point" name="entry-point" className="entry-point-select" ref={entryPointInputRef} onChange={updateEntryPointHandler}>
                         <option value="1">1</option>
                         <option value="2">2</option>
                         <option value="3">3</option>
@@ -56,7 +60,7 @@ const ParkingInput = (props) => {
                 </div>
 
                 <div className="button-container">
-                    <button type='submit' onClick={onSubmitHandler}>Add</button>
+                    <button type='submit' onClick={onSubmitHandler}>Enter</button>
                 </div>
 
             </Card>

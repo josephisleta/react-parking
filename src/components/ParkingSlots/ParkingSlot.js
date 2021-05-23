@@ -37,6 +37,7 @@ const ParkingSlot = (props) => {
                     Distance {props.distancePoints}
                 </span>
             </div>
+
         </li>
     );
 };
