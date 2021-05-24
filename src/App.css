@@ -149,6 +149,12 @@
 .form button:disabled {
     background-color: #a9a9a975;
     border-color: #a9a9a975;
+    cursor: default;
+}
+
+.form input.error {
+    background-color: #fce4e4;
+    border: 1px solid #cc0033;
 }
 
 .form-container.card {
@@ -369,7 +375,7 @@ button.exit img{
     border-radius: 50%;
     width: 120px;
     height: 120px;
-    animation: spin 2s linear infinite;
+    animation: spin 1s linear infinite;
 }
 
 @keyframes spin {
