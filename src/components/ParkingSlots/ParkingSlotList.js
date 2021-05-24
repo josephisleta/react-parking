@@ -1,4 +1,4 @@
-import React, {useContext, useState} from 'react';
+import React, { useContext } from 'react';
 import ParkingSlot from "./ParkingSlot";
 import Card from "../UI/Card";
 
@@ -12,7 +12,13 @@ const ParkingSlotList = () => {
         <section className="parking-slot-container">
             <Card>
                 <ul className="parking-slot-list">
-                    {parkingSlotsContext.parkingSlots.map((parkingSlot) => (
+                    {parkingSlotsContext.isLoading &&
+                    <div className="loader-container">
+                        <div className="loader">
+                        </div>
+                    </div>}
+
+                    {!parkingSlotsContext.isLoading && parkingSlotsContext.parkingSlots.map((parkingSlot) => (
                         <ParkingSlot
                             key={parkingSlot.id}
                             id={parkingSlot.id}

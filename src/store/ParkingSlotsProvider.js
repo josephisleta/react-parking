@@ -2,8 +2,10 @@ import React, { useReducer, useEffect, useState } from 'react';
 import ParkingSlotsContext from "./parking-slots-context";
 
 const ParkingSlotsProvider = (props) => {
+    const [isLoading, setIsLoading] = useState(false);
 
     const fetchParkingSlotsData = (entryPoint = 1) => {
+        setIsLoading(true);
         fetch('http://joseph.local/api/parking?entryPoint=' + entryPoint).then((response) => {
             return response.json()
         }).then((data) => {
@@ -11,17 +13,19 @@ const ParkingSlotsProvider = (props) => {
                 'type': 'UPDATE',
                 'data': data
             });
+            setIsLoading(false);
         });
     };
 
     const defaultParkingSlotsState = {
+        entryOrExitQuantity: 0,
         parkingSlots: [],
         totalParkedVehicles: 0,
     };
 
     const parkingSlotsReducer = (state, action) => {
         if (action.type === 'ENTER') {
-
+            setIsLoading(true);
             fetch('http://joseph.local/api/parking/enter', {
                 method: 'POST',
                 headers: {
@@ -37,7 +41,7 @@ const ParkingSlotsProvider = (props) => {
         }
 
         if (action.type === 'EXIT') {
-
+            setIsLoading(true);
             fetch('http://joseph.local/api/parking/exit', {
                 method: 'POST',
                 headers: {
@@ -62,6 +66,7 @@ const ParkingSlotsProvider = (props) => {
             }
 
             return {
+                entryOrExitQuantity: action.data.entryOrExitQuantity,
                 parkingSlots: action.data.parkingSlots,
                 totalParkedVehicles: totalParkedVehicles
             };
@@ -89,7 +94,7 @@ const ParkingSlotsProvider = (props) => {
 
         if (action.type === 'TOGGLE') {
             return {
-                parkingSlip: {},
+                parkingSlip: state.parkingSlip,
                 displayParkingSlip: !state.displayParkingSlip
             };
         }
@@ -132,18 +137,24 @@ const ParkingSlotsProvider = (props) => {
 
     const [entryPoint, setEntryPoint] = useState(1);
 
+    const [error, setError] = useState({});
+
     useEffect(() => {
         fetchParkingSlotsData(entryPoint);
-    }, [parkingSlipState.parkingSlip, entryPoint]);
+    }, [parkingSlotsState.data, parkingSlipState.parkingSlip, entryPoint]);
 
     const parkingSlotsContext = {
+        entryOrExitQuantity: parkingSlotsState.entryOrExitQuantity,
         parkingSlots: parkingSlotsState.parkingSlots,
         totalParkedVehicles: parkingSlotsState.totalParkedVehicles,
         enter: enterHandler,
         exit: exitHandler,
         parkingSlip: parkingSlipState,
         toggleParkingSlip: toggleParkingSlipHandler,
-        updateEntryPoint: updateEntryPointHandler
+        currentEntryPoint: entryPoint,
+        updateEntryPoint: updateEntryPointHandler,
+        isLoading: isLoading,
+        error: error
     };
 
     return (

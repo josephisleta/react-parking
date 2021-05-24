@@ -32,15 +32,22 @@ const ParkingInput = () => {
         parkingSlotsContext.updateEntryPoint(entryPointInputRef.current.value);
     };
 
+    const entryPointOptions = [];
+
+    for (let i = 1; i <= parkingSlotsContext.entryOrExitQuantity; i++) {
+        entryPointOptions.push(<option value={i} key={i}>{i}</option>);
+    }
+
    return (
        <form className="form">
             <Card>
                 <div className="input entry-point-container">
                     <label htmlFor='entry-point'>Entry Point</label>
-                    <select id="entry-point" name="entry-point" className="entry-point-select" ref={entryPointInputRef} onChange={updateEntryPointHandler}>
-                        <option value="1">1</option>
-                        <option value="2">2</option>
-                        <option value="3">3</option>
+                    <select id="entry-point" name="entry-point" className="entry-point-select"
+                            ref={entryPointInputRef}
+                            value={parkingSlotsContext.currentEntryPoint}
+                            onChange={updateEntryPointHandler}>
+                        {entryPointOptions}
                     </select>
                 </div>
 
