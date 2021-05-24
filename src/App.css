@@ -152,7 +152,7 @@
     cursor: default;
 }
 
-.form input.error {
+.form input.error, .form select.error {
     background-color: #fce4e4;
     border: 1px solid #cc0033;
 }

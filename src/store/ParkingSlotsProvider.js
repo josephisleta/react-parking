@@ -13,6 +13,9 @@ const ParkingSlotsProvider = (props) => {
                 'type': 'UPDATE',
                 'data': data
             });
+        }).catch((err) => {
+            console.log(err);
+        }).finally(() => {
             setIsLoading(false);
         });
     };

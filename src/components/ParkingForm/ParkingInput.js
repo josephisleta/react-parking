@@ -13,6 +13,11 @@ const ParkingInput = () => {
     const colorRef = useRef();
 
     const changeEntryPointHandler = (event) => {
+        if (!isValidEntryPoint(event.target.value)) {
+            entryPointRef.current.className = 'entry-point-select error';
+        } else {
+            entryPointRef.current.className = 'entry-point-select';
+        }
         parkingSlotsContext.updateEntryPoint(event.target.value);
     };
 
@@ -25,11 +30,15 @@ const ParkingInput = () => {
     };
 
     const changeTypeHandler = (event) => {
-
+        if (!isValidType(event.target.value)) {
+            typeRef.current.className = 'error';
+        } else {
+            typeRef.current.className = '';
+        }
     };
 
     const changeColorHandler = (event) => {
-        if (!event.target.value) {
+        if (!isValidColor(event.target.value)) {
             colorRef.current.className = 'error';
         } else {
             colorRef.current.className = '';
@@ -37,30 +46,45 @@ const ParkingInput = () => {
     };
 
     const validateForm = () => {
-        let errors = {};
         let formIsValid = true;
+
+        if (!isValidEntryPoint(entryPointRef.current.value)) {
+            formIsValid = false;
+            entryPointRef.current.className = 'error';
+        }
 
         if (!isValidPlateNumber(plateNumberRef.current.value)) {
             formIsValid = false;
-            errors["plateNumber"] = "Please enter a valid plate number.";
             plateNumberRef.current.className = 'error';
+        }
+
+        if (!isValidType(typeRef.current.value)) {
+            formIsValid = false;
+            typeRef.current.className = 'error';
         }
 
         if (!isValidColor(colorRef.current.value)) {
             formIsValid = false;
-            errors["color"] = "Please enter a valid color.";
             colorRef.current.className = 'error';
         }
 
         return formIsValid;
     };
 
+    const isValidEntryPoint = (entryPoint) => {
+        return !(!entryPoint || !entryPoint.match(/^[0-9]+$/) || entryPoint > parkingSlotsContext.entryOrExitQuantity);
+    };
+
     const isValidPlateNumber = (plateNumber) => {
         return !(!plateNumber || !plateNumber.match(/^[a-zA-Z0-9]+$/));
     };
 
+    const isValidType = (type) => {
+        return !(!type || !type.match(/^[S|M|L]$/));
+    };
+
     const isValidColor = (color) => {
-        return !(!color || !color.match(/^[a-zA-Z ]+$/));
+        return !(!color.match(/^[a-zA-Z ]*$/));
     };
 
     const onSubmitHandler = (event) => {
