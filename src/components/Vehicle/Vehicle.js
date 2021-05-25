@@ -7,7 +7,6 @@ const Vehicle = (props) => {
     return (
         <div className="vehicle-container">
             <div className={`card vehicle-${props.type}`}>
-
                 <div className="vehicle-header">
                     {props.plateNumber}
                     <button type="button" className="btn exit" onClick={props.onExit}>

@@ -1,21 +1,21 @@
 import React, { useContext } from 'react';
 
-import ParkingSlotsContext from "../../store/parking-slots-context";
+import ParkingLotContext from "../../store/parking-lot-context";
 import ParkingSlip from "../ParkingSlips/ParkingSlip";
 import ParkingSlot from "./ParkingSlot";
 import Card from "../UI/Card";
 import Loader from "../UI/Loader";
 
 const ParkingSlotList = () => {
-    const parkingSlotsContext = useContext(ParkingSlotsContext);
+    const parkingLotContext = useContext(ParkingLotContext);
 
     return (
         <section className="parking-slot-container">
             <Card>
                 <ul className="parking-slot-list">
-                    {parkingSlotsContext.isLoading && <Loader />}
+                    {parkingLotContext.isLoading && <Loader />}
 
-                    {!parkingSlotsContext.isLoading && parkingSlotsContext.parkingSlots.map((parkingSlot) => (
+                    {!parkingLotContext.isLoading && parkingLotContext.parkingSlots.map((parkingSlot) => (
                         <ParkingSlot
                             key={parkingSlot.id}
                             id={parkingSlot.id}
@@ -29,10 +29,10 @@ const ParkingSlotList = () => {
                 </ul>
             </Card>
 
-            {parkingSlotsContext.parkingSlip.displayParkingSlip &&
+            {parkingLotContext.parkingSlip.displayParkingSlip &&
             <ParkingSlip
-                data={parkingSlotsContext.parkingSlip.parkingSlip}
-                onClose={parkingSlotsContext.toggleParkingSlip}
+                data={parkingLotContext.parkingSlip.parkingSlip}
+                onClose={parkingLotContext.toggleParkingSlip}
             />}
         </section>
     );

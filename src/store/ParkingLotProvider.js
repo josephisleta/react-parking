@@ -1,7 +1,7 @@
 import React, { useReducer, useEffect, useState } from 'react';
-import ParkingSlotsContext from "./parking-slots-context";
+import ParkingLotContext from "./parking-lot-context";
 
-const ParkingSlotsProvider = (props) => {
+const ParkingLotProvider = (props) => {
     const [isLoading, setIsLoading] = useState(false);
 
     const fetchParkingSlotsData = (entryPoint = 1) => {
@@ -144,7 +144,7 @@ const ParkingSlotsProvider = (props) => {
         fetchParkingSlotsData(entryPoint);
     }, [parkingSlotsState.data, parkingSlipState.parkingSlip, entryPoint]);
 
-    const parkingSlotsContext = {
+    const parkingLotContext = {
         entryOrExitQuantity: parkingSlotsState.entryOrExitQuantity,
         parkingSlots: parkingSlotsState.parkingSlots,
         totalParkedVehicles: parkingSlotsState.totalParkedVehicles,
@@ -158,10 +158,10 @@ const ParkingSlotsProvider = (props) => {
     };
 
     return (
-        <ParkingSlotsContext.Provider value={parkingSlotsContext}>
+        <ParkingLotContext.Provider value={parkingLotContext}>
             {props.children}
-        </ParkingSlotsContext.Provider>
+        </ParkingLotContext.Provider>
     );
 };
 
-export default ParkingSlotsProvider;
+export default ParkingLotProvider;

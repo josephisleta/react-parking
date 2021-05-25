@@ -1,11 +1,11 @@
 import React, { useContext, useRef } from 'react';
 
-import ParkingSlotsContext from "../../store/parking-slots-context";
+import ParkingLotContext from "../../store/parking-lot-context";
 import Card from '../UI/Card';
 
 const ParkingInput = () => {
 
-    const parkingSlotsContext = useContext(ParkingSlotsContext);
+    const parkingLotContext = useContext(ParkingLotContext);
 
     const entryPointRef = useRef();
     const plateNumberRef = useRef();
@@ -18,7 +18,7 @@ const ParkingInput = () => {
         } else {
             entryPointRef.current.className = 'entry-point entry-point-select';
         }
-        parkingSlotsContext.updateEntryPoint(event.target.value);
+        parkingLotContext.updateEntryPoint(event.target.value);
     };
 
     const changePlateNumberHandler = (event) => {
@@ -72,7 +72,7 @@ const ParkingInput = () => {
     };
 
     const isValidEntryPoint = (entryPoint) => {
-        return !(!entryPoint || !entryPoint.match(/^[0-9]+$/) || entryPoint > parkingSlotsContext.entryOrExitQuantity);
+        return !(!entryPoint || !entryPoint.match(/^[0-9]+$/) || entryPoint > parkingLotContext.entryOrExitQuantity);
     };
 
     const isValidPlateNumber = (plateNumber) => {
@@ -98,7 +98,7 @@ const ParkingInput = () => {
                 'color': colorRef.current.value
             };
 
-            parkingSlotsContext.enter(form);
+            parkingLotContext.enter(form);
 
             plateNumberRef.current.value = '';
             colorRef.current.value = '';
@@ -107,7 +107,7 @@ const ParkingInput = () => {
 
     const entryPointOptions = [];
 
-    for (let i = 1; i <= parkingSlotsContext.entryOrExitQuantity; i++) {
+    for (let i = 1; i <= parkingLotContext.entryOrExitQuantity; i++) {
         entryPointOptions.push(<option value={i} key={i}>{i}</option>);
     }
 
@@ -117,7 +117,7 @@ const ParkingInput = () => {
                 <div className="input">
                     <label htmlFor='entry-point' className="entry-point">Entry Point</label>
                     <select id="entry-point" name="entry-point" className="entry-point entry-point-select"
-                            value={parkingSlotsContext.currentEntryPoint}
+                            value={parkingLotContext.currentEntryPoint}
                             ref={entryPointRef}
                             onChange={changeEntryPointHandler}>
                         {entryPointOptions}

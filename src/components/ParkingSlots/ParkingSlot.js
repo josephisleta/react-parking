@@ -1,14 +1,14 @@
 import React, { useContext } from 'react';
 
-import ParkingSlotsContext from "../../store/parking-slots-context";
+import ParkingLotContext from "../../store/parking-lot-context";
 import Vehicle from "../Vehicle/Vehicle";
 
 const ParkingSlot = (props) => {
 
-    const parkingSlotsContext = useContext(ParkingSlotsContext);
+    const parkingLotContext = useContext(ParkingLotContext);
 
     const exitHandler = () => {
-        parkingSlotsContext.exit(props.id);
+        parkingLotContext.exit(props.id);
     };
 
     return (

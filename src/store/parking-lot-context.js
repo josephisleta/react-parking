@@ -1,6 +1,6 @@
 import React from 'react';
 
-const ParkingSlotsContext = React.createContext({
+const ParkingLotContext = React.createContext({
     entryOrExitQuantity: 0,
     parkingSlots: [],
     totalParkedVehicles: 0,
@@ -13,4 +13,4 @@ const ParkingSlotsContext = React.createContext({
     isLoading: false
 });
 
-export default ParkingSlotsContext;
+export default ParkingLotContext;

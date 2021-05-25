@@ -1,13 +1,13 @@
 import React, { useContext } from 'react';
 
-import ParkingSlotsContext from "../../store/parking-slots-context";
+import ParkingLotContext from "../../store/parking-lot-context";
 
 import parkingImage from '../../assets/images/parkingImage.PNG';
 import carIcon from '../../assets/images/car-icon.png';
 
 const Header = () => {
 
-    const parkingSlotsContext = useContext(ParkingSlotsContext);
+    const parkingLotContext = useContext(ParkingLotContext);
 
     return (
         <>
@@ -17,9 +17,9 @@ const Header = () => {
                 <div className="header-button-container">
                     <button type="button" className="car-icon">
                         <img src={carIcon} alt='Car Icon image' />
-                        <div className="quantity">{parkingSlotsContext.totalParkedVehicles}</div>
+                        <div className="quantity">{parkingLotContext.totalParkedVehicles}</div>
                         <span className="parking-slot-icon" />
-                        <div className="quantity">{parkingSlotsContext.parkingSlots.length - parkingSlotsContext.totalParkedVehicles}</div>
+                        <div className="quantity">{parkingLotContext.parkingSlots.length - parkingLotContext.totalParkedVehicles}</div>
                     </button>
                 </div>
             </header>
