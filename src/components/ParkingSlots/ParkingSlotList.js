@@ -1,9 +1,10 @@
 import React, { useContext } from 'react';
-import ParkingSlot from "./ParkingSlot";
-import Card from "../UI/Card";
 
 import ParkingSlotsContext from "../../store/parking-slots-context";
 import ParkingSlip from "../ParkingSlips/ParkingSlip";
+import ParkingSlot from "./ParkingSlot";
+import Card from "../UI/Card";
+import Loader from "../UI/Loader";
 
 const ParkingSlotList = () => {
     const parkingSlotsContext = useContext(ParkingSlotsContext);
@@ -12,11 +13,7 @@ const ParkingSlotList = () => {
         <section className="parking-slot-container">
             <Card>
                 <ul className="parking-slot-list">
-                    {parkingSlotsContext.isLoading &&
-                    <div className="loader-container">
-                        <div className="loader">
-                        </div>
-                    </div>}
+                    {parkingSlotsContext.isLoading && <Loader />}
 
                     {!parkingSlotsContext.isLoading && parkingSlotsContext.parkingSlots.map((parkingSlot) => (
                         <ParkingSlot

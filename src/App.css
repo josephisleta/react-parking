@@ -27,6 +27,19 @@
     object-fit: cover;
 }
 
+.header .header-button-container {
+    display: flex;
+    justify-content: flex-end;
+    width: 20%;
+}
+
+.header .parking-slot-icon {
+    width: 50px;
+    height: 34px;
+    border: 3px solid black;
+    margin: 4px;
+}
+
 .parking-slot-header {
     display: flex;
     flex-wrap: wrap;
@@ -133,9 +146,9 @@
     border: 1px solid dodgerblue;
     color: white;
     padding: 0.25rem 2rem;
-    border-radius: 20px;
+    border-radius: 10px;
     font-weight: bold;
-    width: 50%;
+    width: 100%;
     height: 4rem;
     margin-top: 0.5rem;
 }
@@ -169,7 +182,7 @@ button.car-icon {
     font: inherit;
     cursor: pointer;
     background-color: #ffffff;
-    border-radius: 20px;
+    border-radius: 15px;
     font-weight: bold;
     min-width: 8%;
     height: 3rem;
@@ -189,8 +202,9 @@ button.car-icon img {
 }
 
 button.car-icon .quantity {
-    margin: 6px;
-    font-size: 25px;
+    margin: 10px;
+    font-size: 20px;
+    font-weight: normal;
 }
 
 button.exit {
@@ -254,14 +268,18 @@ button.exit img{
     border-radius: 14px;
 }
 
-.entry-point-container {
+.entry-point {
     font-weight: bold;
 }
 
-.entry-point-container .entry-point-select {
+.entry-point.entry-point-select {
     font-size: 50px;
     width: 100px;
     height: 80px;
+}
+
+form .color-input {
+    width: 12rem;
 }
 
 .dot {
@@ -282,6 +300,7 @@ button.exit img{
 .button-container {
     display: flex;
     justify-content: center;
+    width: 12%;
 }
 
 .backdrop {

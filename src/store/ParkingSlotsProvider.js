@@ -140,8 +140,6 @@ const ParkingSlotsProvider = (props) => {
 
     const [entryPoint, setEntryPoint] = useState(1);
 
-    const [error, setError] = useState({});
-
     useEffect(() => {
         fetchParkingSlotsData(entryPoint);
     }, [parkingSlotsState.data, parkingSlipState.parkingSlip, entryPoint]);
@@ -156,8 +154,7 @@ const ParkingSlotsProvider = (props) => {
         toggleParkingSlip: toggleParkingSlipHandler,
         currentEntryPoint: entryPoint,
         updateEntryPoint: updateEntryPointHandler,
-        isLoading: isLoading,
-        error: error
+        isLoading: isLoading
     };
 
     return (

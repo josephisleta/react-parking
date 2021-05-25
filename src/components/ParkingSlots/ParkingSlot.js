@@ -7,18 +7,15 @@ const ParkingSlot = (props) => {
 
     const parkingSlotsContext = useContext(ParkingSlotsContext);
 
-    const exitHandler = (event) => {
+    const exitHandler = () => {
         parkingSlotsContext.exit(props.id);
     };
 
     return (
         <li className={`parking-slot-${props.type}`}>
             <div className="parking-slot-header">
-                <span>
-                    {props.id}
-                </span>
-                <span className={"dot " + (props.isAvailable === '1' ? 'green' : 'red')}>
-                </span>
+                <span>{props.id}</span>
+                <span className={"dot " + (props.isAvailable === '1' ? 'green' : 'red')} />
             </div>
 
             {props.vehicle && props.parkingSlip && <Vehicle
@@ -30,14 +27,9 @@ const ParkingSlot = (props) => {
             />}
 
             <div className="parking-slot-footer">
-                <span>
-                    {props.type}
-                </span>
-                <span>
-                    Distance {props.distancePoints}
-                </span>
+                <span>{props.type}</span>
+                <span>Distance {props.distancePoints}</span>
             </div>
-
         </li>
     );
 };

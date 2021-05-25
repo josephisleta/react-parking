@@ -1,7 +1,7 @@
 import React, { useContext, useRef } from 'react';
 
-import Card from '../UI/Card';
 import ParkingSlotsContext from "../../store/parking-slots-context";
+import Card from '../UI/Card';
 
 const ParkingInput = () => {
 
@@ -14,9 +14,9 @@ const ParkingInput = () => {
 
     const changeEntryPointHandler = (event) => {
         if (!isValidEntryPoint(event.target.value)) {
-            entryPointRef.current.className = 'entry-point-select error';
+            entryPointRef.current.className = 'entry-point entry-point-select error';
         } else {
-            entryPointRef.current.className = 'entry-point-select';
+            entryPointRef.current.className = 'entry-point entry-point-select';
         }
         parkingSlotsContext.updateEntryPoint(event.target.value);
     };
@@ -39,9 +39,9 @@ const ParkingInput = () => {
 
     const changeColorHandler = (event) => {
         if (!isValidColor(event.target.value)) {
-            colorRef.current.className = 'error';
+            colorRef.current.className = 'error color-input';
         } else {
-            colorRef.current.className = '';
+            colorRef.current.className = 'color-input';
         }
     };
 
@@ -114,17 +114,15 @@ const ParkingInput = () => {
    return (
        <form className="form">
             <Card>
-                <div className="input entry-point-container">
-                    <label htmlFor='entry-point'>Entry Point</label>
-                    <select id="entry-point" name="entry-point" className="entry-point-select"
+                <div className="input">
+                    <label htmlFor='entry-point' className="entry-point">Entry Point</label>
+                    <select id="entry-point" name="entry-point" className="entry-point entry-point-select"
                             value={parkingSlotsContext.currentEntryPoint}
                             ref={entryPointRef}
                             onChange={changeEntryPointHandler}>
                         {entryPointOptions}
                     </select>
-                </div>
 
-                <div className="input">
                     <label htmlFor='plate-number'>Plate number</label>
                     <input id='plate-number' type='text' name='plate-number'
                            ref={plateNumberRef}
@@ -138,16 +136,14 @@ const ParkingInput = () => {
                     </select>
 
                     <label htmlFor='color'>Color</label>
-                    <input id='color' type='text' name='color'
+                    <input id='color' type='text' name='color' className="color-input"
                            ref={colorRef}
-                           onChange={changeColorHandler}
-                    />
-                </div>
+                           onChange={changeColorHandler}/>
 
-                <div className="button-container">
-                    <button type='submit' onClick={onSubmitHandler}>Enter</button>
+                    <div className="button-container">
+                        <button type='submit' onClick={onSubmitHandler}>Enter</button>
+                    </div>
                 </div>
-
             </Card>
        </form>
    );

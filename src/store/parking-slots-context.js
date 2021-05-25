@@ -10,8 +10,7 @@ const ParkingSlotsContext = React.createContext({
     toggleParkingSlip: () => {},
     currentEntryPoint: 1,
     updateEntryPoint: () => {},
-    isLoading: false,
-    error: {}
+    isLoading: false
 });
 
 export default ParkingSlotsContext;

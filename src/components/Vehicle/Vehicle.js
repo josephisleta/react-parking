@@ -1,7 +1,7 @@
 import React from 'react';
-import Moment from 'moment'
+import Moment from 'moment';
 
-import exitIcon from '../../assets/exit-icon.PNG';
+import exitIcon from '../../assets/images/exit-icon.PNG';
 
 const Vehicle = (props) => {
     return (
