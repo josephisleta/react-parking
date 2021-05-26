@@ -1,8 +1,10 @@
-import React, { useReducer, useEffect, useState } from 'react';
+import React, {useEffect, useReducer, useState} from 'react';
 import ParkingLotContext from "./parking-lot-context";
 
 const ParkingLotProvider = (props) => {
     const [isLoading, setIsLoading] = useState(false);
+    const [entryPoint, setEntryPoint] = useState(1);
+    const [error, setError] = useState('');
 
     const fetchParkingSlotsData = (entryPoint = 1) => {
         setIsLoading(true);
@@ -14,10 +16,36 @@ const ParkingLotProvider = (props) => {
                 'data': data
             });
         }).catch((err) => {
-            console.log(err);
+            setError('Cannot get data from the API endpoint. Please contact the developer.');
         }).finally(() => {
             setIsLoading(false);
         });
+    };
+
+    const fetchEnter = async (params) => {
+        setIsLoading(true);
+        const response = await fetch('http://joseph.local/api/parking/enter', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded'
+            },
+            body: new URLSearchParams(params)
+        });
+
+        return await response.json();
+    };
+
+    const fetchExit = async (params) => {
+        setIsLoading(true);
+        const response = await fetch('http://joseph.local/api/parking/exit', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded'
+            },
+            body: new URLSearchParams(params)
+        });
+
+        return await response.json();
     };
 
     const defaultParkingSlotsState = {
@@ -27,42 +55,38 @@ const ParkingLotProvider = (props) => {
     };
 
     const parkingSlotsReducer = (state, action) => {
-        if (action.type === 'ENTER') {
-            setIsLoading(true);
-            fetch('http://joseph.local/api/parking/enter', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/x-www-form-urlencoded'
-                },
-                body: new URLSearchParams(action.data)
-            }).then((response) => {
-                return response.json()
-            }).then((data) => {
-                fetchParkingSlotsData(entryPoint);
-            });
+        let response;
 
+        if (action.type === 'ENTER') {
+            response = fetchEnter(action.data);
         }
 
         if (action.type === 'EXIT') {
-            setIsLoading(true);
-            fetch('http://joseph.local/api/parking/exit', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/x-www-form-urlencoded'
-                },
-                body: new URLSearchParams(action.data)
-            }).then((response) => {
-                return response.json()
-            }).then((data) => {
-                dispatchParkingSlipState({
-                    'type': 'EXIT',
-                    'data': data
-                });
+            response = fetchExit(action.data);
+            response.then((data) => {
+                if (data.parkingSlip) {
+                    dispatchParkingSlipState({
+                        'type': 'EXIT',
+                        'data': data
+                    });
+                }
             });
         }
 
-        if (action.type === 'UPDATE') {
+        if (response) {
+            response.then((data) => {
+                if (data.errorMessage) {
+                    setIsLoading(false);
+                    setError(data.errorMessage);
+                } else {
+                    fetchParkingSlotsData(entryPoint);
+                }
+            });
 
+            return state;
+        }
+
+        if (action.type === 'UPDATE') {
             let totalParkedVehicles = 0;
             for (let i of action.data.parkingSlots) {
                 if (i.vehicle) totalParkedVehicles++;
@@ -80,14 +104,12 @@ const ParkingLotProvider = (props) => {
 
     const [parkingSlotsState, dispatchParkingSlotsState] = useReducer(parkingSlotsReducer, defaultParkingSlotsState);
 
-
     const defaultParkingSlipState = {
         parkingSlip: {},
         displayParkingSlip: false,
     };
 
     const parkingSlipReducer = (state, action) => {
-
         if (action.type === 'EXIT') {
             return {
                 parkingSlip: action.data.parkingSlip,
@@ -138,11 +160,13 @@ const ParkingLotProvider = (props) => {
         });
     };
 
-    const [entryPoint, setEntryPoint] = useState(1);
+    const clearErrorHandler = () => {
+        setError('');
+    };
 
     useEffect(() => {
         fetchParkingSlotsData(entryPoint);
-    }, [parkingSlotsState.data, parkingSlipState.parkingSlip, entryPoint]);
+    }, [parkingSlotsState.data, entryPoint]);
 
     const parkingLotContext = {
         entryOrExitQuantity: parkingSlotsState.entryOrExitQuantity,
@@ -154,7 +178,9 @@ const ParkingLotProvider = (props) => {
         toggleParkingSlip: toggleParkingSlipHandler,
         currentEntryPoint: entryPoint,
         updateEntryPoint: updateEntryPointHandler,
-        isLoading: isLoading
+        isLoading: isLoading,
+        error: error,
+        clearError: clearErrorHandler
     };
 
     return (

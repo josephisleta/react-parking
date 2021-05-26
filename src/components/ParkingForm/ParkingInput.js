@@ -2,6 +2,7 @@ import React, { useContext, useRef } from 'react';
 
 import ParkingLotContext from "../../store/parking-lot-context";
 import Card from '../UI/Card';
+import ErrorModal from "../UI/ErrorModal";
 
 const ParkingInput = () => {
 
@@ -111,6 +112,10 @@ const ParkingInput = () => {
         entryPointOptions.push(<option value={i} key={i}>{i}</option>);
     }
 
+    const closeErrorHandler = () => {
+        parkingLotContext.clearError();
+    };
+
    return (
        <form className="form">
             <Card>
@@ -145,6 +150,10 @@ const ParkingInput = () => {
                     </div>
                 </div>
             </Card>
+           {parkingLotContext.error && <ErrorModal
+               onClose={closeErrorHandler}
+               message={parkingLotContext.error}
+           />}
        </form>
    );
 };

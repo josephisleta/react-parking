@@ -16,7 +16,7 @@ const Header = () => {
 
                 <div className="header-button-container">
                     <button type="button" className="car-icon">
-                        <img src={carIcon} alt='Car Icon image' />
+                        <img src={carIcon} alt='Car Icon' />
                         <div className="quantity">{parkingLotContext.totalParkedVehicles}</div>
                         <span className="parking-slot-icon" />
                         <div className="quantity">{parkingLotContext.parkingSlots.length - parkingLotContext.totalParkedVehicles}</div>
@@ -24,7 +24,7 @@ const Header = () => {
                 </div>
             </header>
             <div className="header-image">
-                <img src={parkingImage} alt='Parking Lot image' />
+                <img src={parkingImage} alt='Parking Lot' />
             </div>
         </>
     );
