@@ -27,9 +27,9 @@ const ParkingLotProvider = (props) => {
         const response = await fetch('http://joseph.local/api/parking/enter', {
             method: 'POST',
             headers: {
-                'Content-Type': 'application/x-www-form-urlencoded'
+                'Content-Type': 'application/json'
             },
-            body: new URLSearchParams(params)
+            body: JSON.stringify(params)
         });
 
         return await response.json();
@@ -40,9 +40,9 @@ const ParkingLotProvider = (props) => {
         const response = await fetch('http://joseph.local/api/parking/exit', {
             method: 'POST',
             headers: {
-                'Content-Type': 'application/x-www-form-urlencoded'
+                'Content-Type': 'application/json'
             },
-            body: new URLSearchParams(params)
+            body: JSON.stringify(params)
         });
 
         return await response.json();
