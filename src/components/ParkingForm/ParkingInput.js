@@ -15,7 +15,7 @@ const ParkingInput = () => {
 
     const changeEntryPointHandler = (event) => {
         if (!isValidEntryPoint(event.target.value)) {
-            entryPointRef.current.className = 'entry-point entry-point-select error';
+            entryPointRef.current.className = 'error entry-point entry-point-select';
         } else {
             entryPointRef.current.className = 'entry-point entry-point-select';
         }
@@ -51,7 +51,7 @@ const ParkingInput = () => {
 
         if (!isValidEntryPoint(entryPointRef.current.value)) {
             formIsValid = false;
-            entryPointRef.current.className = 'error';
+            entryPointRef.current.className = 'error entry-point entry-point-select';
         }
 
         if (!isValidPlateNumber(plateNumberRef.current.value)) {
@@ -66,7 +66,7 @@ const ParkingInput = () => {
 
         if (!isValidColor(colorRef.current.value)) {
             formIsValid = false;
-            colorRef.current.className = 'error';
+            colorRef.current.className = 'error color-input';
         }
 
         return formIsValid;
@@ -77,7 +77,7 @@ const ParkingInput = () => {
     };
 
     const isValidPlateNumber = (plateNumber) => {
-        return !(!plateNumber || !plateNumber.match(/^[a-zA-Z0-9]+$/));
+        return !(!plateNumber || !plateNumber.match(/^[a-zA-Z0-9]{1,8}$/));
     };
 
     const isValidType = (type) => {
@@ -85,7 +85,7 @@ const ParkingInput = () => {
     };
 
     const isValidColor = (color) => {
-        return !(!color.match(/^[a-zA-Z ]*$/));
+        return !(!color.match(/^[a-zA-Z ]{0,14}$/));
     };
 
     const onSubmitHandler = (event) => {

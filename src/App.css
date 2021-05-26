@@ -78,32 +78,54 @@
 
 .parking-slot-SP {
     border: 3px solid black;
-    width: 15%;
-    min-height: 10rem;
+    border-bottom: 2px dashed;
+    width: 10%;
+    height: 15rem;
     padding: 8px;
-    margin-bottom: 15px;
+    margin-bottom: 3rem;
 }
 
 .parking-slot-MP {
     border: 3px solid black;
-    width: 20%;
-    min-height: 10rem;
+    border-bottom: 2px dashed;
+    width: 13%;
+    height: 17rem;
     padding: 8px;
-    margin-bottom: 15px;
+    margin-bottom: 3rem;
 }
 
 .parking-slot-LP {
     border: 3px solid black;
-    width: 25%;
-    min-height: 10rem;
+    border-bottom: 2px dashed;
+    width: 16%;
+    height: 19rem;
     padding: 8px;
-    margin-bottom: 15px;
+    margin-bottom: 3rem;
+}
+
+.parking-slot-container .parking-slot-distance{
+    font-size: 14px;
 }
 
 .vehicle-container {
     display: flex;
     justify-content: center;
     margin-bottom: 8px;
+}
+
+.vehicle-container .card {
+    background: url("./assets/images/cartop.PNG") no-repeat;
+    background-blend-mode: luminosity;
+    background-size: 100% 100%;
+    box-shadow: unset;
+}
+
+.vehicle-container .vehicle-type {
+    background-color: white;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    text-align: center;
 }
 
 .vehicle-header {
@@ -113,25 +135,58 @@
 }
 
 .vehicle-info {
-    display: flex;
-    justify-content: space-between;
-    margin-bottom: 10px;
+
+    background-color: rgba(146, 146, 146, 0.3);
+}
+
+.vehicle-info div {
+    color: white;
+    text-shadow: #000 1px 0 10px;
+}
+
+.vehicle-info .vehicle-plate-number {
+
+}
+
+.vehicle-info .vehicle-color {
+    font-size: 14px;
+}
+
+.vehicle-info .vehicle-time {
+    font-size: 14px;
+}
+
+.vehicle-info.type-S {
+
+}
+
+.vehicle-info.type-M {
+    padding: 11px;
+}
+
+.vehicle-info.type-L {
+    padding: 22px;
 }
 
 .vehicle-S {
-    width: 10rem;
+    width: 6rem;
+    height: 10rem;
     background-color: darkgray;
 }
 
 .vehicle-M {
-    width: 15rem;
+    width: 8rem;
+    height: 12rem;
     background-color: darkgray;
 }
 
 .vehicle-L {
-    width: 20rem;
+    width: 10rem;
+    height: 14rem;
     background-color: darkgray;
 }
+
+
 
 .form {
     max-width: 90rem;

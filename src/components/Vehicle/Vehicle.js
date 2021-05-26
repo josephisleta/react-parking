@@ -6,18 +6,19 @@ import exitIcon from '../../assets/images/exit-icon.PNG';
 const Vehicle = (props) => {
     return (
         <div className="vehicle-container">
-            <div className={`card vehicle-${props.type}`}>
+            <div className={`card vehicle-${props.type}`} style={{ backgroundColor: props.color }}>
                 <div className="vehicle-header">
-                    {props.plateNumber}
+
+                    <b className="vehicle-type">{props.type}</b>
                     <button type="button" className="btn exit" onClick={props.onExit}>
                         <img src={exitIcon} alt="Exit icon" />
                     </button>
                 </div>
-                <div className="vehicle-info">
-                    <span>{props.type}</span>
-                    <span>{props.color}</span>
+                <div className={`vehicle-info type-${props.type}`}>
+                    <div className="vehicle-plate-number"><b>{props.plateNumber}</b></div>
+                    <div className="vehicle-color">{props.color}</div>
+                    <div className="vehicle-time">{Moment(props.entryTime).fromNow()}</div>
                 </div>
-                <div>{Moment(props.entryTime).fromNow()}</div>
             </div>
         </div>
     );
