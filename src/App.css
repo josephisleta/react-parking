@@ -1,38 +1,458 @@
-.App {
-  text-align: center;
+.header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 5rem;
+    background-color: #0f738a;
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 10%;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
+    z-index: 10;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.header-image {
+    width: 100%;
+    height: 20rem;
+    z-index: 0;
+    overflow: hidden;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.header-image img {
+    width: 110%;
+    height: 100%;
+    object-fit: cover;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+.header .header-button-container {
+    display: flex;
+    justify-content: flex-end;
+    width: 20%;
 }
 
-.App-link {
-  color: #61dafb;
+.header .parking-slot-icon {
+    width: 50px;
+    height: 34px;
+    border: 3px solid black;
+    margin: 4px;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.parking-slot-header {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.parking-slot-footer {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.parking-slot-container {
+    max-width: 90rem;
+    width: 90%;
+    margin: 2rem auto;
+}
+
+.parking-slot-container ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.parking-slot-list {
+    display: flex;
+    flex-wrap: wrap;
+    margin: 1rem;
+    padding-bottom: 1rem;
+    border-radius: 8px;
+}
+
+.parking-slot-list h3 {
+    margin: 0 0 0.25rem 0;
+}
+
+.parking-slot-SP {
+    border: 3px solid black;
+    border-bottom: 2px dashed;
+    width: 10%;
+    height: 15rem;
+    padding: 8px;
+    margin-bottom: 3rem;
+}
+
+.parking-slot-MP {
+    border: 3px solid black;
+    border-bottom: 2px dashed;
+    width: 13%;
+    height: 17rem;
+    padding: 8px;
+    margin-bottom: 3rem;
+}
+
+.parking-slot-LP {
+    border: 3px solid black;
+    border-bottom: 2px dashed;
+    width: 16%;
+    height: 19rem;
+    padding: 8px;
+    margin-bottom: 3rem;
+}
+
+.parking-slot-container .parking-slot-distance{
+    font-size: 14px;
+}
+
+.vehicle-container {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 8px;
+}
+
+.vehicle-container .card {
+    background: url("./assets/images/cartop.PNG") no-repeat;
+    background-blend-mode: luminosity;
+    background-size: 100% 100%;
+    box-shadow: unset;
+}
+
+.vehicle-container .vehicle-type {
+    background-color: white;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    text-align: center;
+}
+
+.vehicle-header {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+}
+
+.vehicle-info {
+
+    background-color: rgba(146, 146, 146, 0.3);
+}
+
+.vehicle-info div {
+    color: white;
+    text-shadow: #000 1px 0 10px;
+}
+
+.vehicle-info .vehicle-plate-number {
+
+}
+
+.vehicle-info .vehicle-color {
+    font-size: 14px;
+}
+
+.vehicle-info .vehicle-time {
+    font-size: 14px;
+}
+
+.vehicle-info.type-S {
+
+}
+
+.vehicle-info.type-M {
+    padding: 11px;
+}
+
+.vehicle-info.type-L {
+    padding: 22px;
+}
+
+.vehicle-S {
+    width: 6rem;
+    height: 10rem;
+    background-color: darkgray;
+}
+
+.vehicle-M {
+    width: 8rem;
+    height: 12rem;
+    background-color: darkgray;
+}
+
+.vehicle-L {
+    width: 10rem;
+    height: 14rem;
+    background-color: darkgray;
+}
+
+
+
+.form {
+    max-width: 90rem;
+    width: 90%;
+    margin: 2rem auto;
+}
+
+.form button {
+    font: inherit;
+    cursor: pointer;
+    background-color: dodgerblue;
+    border: 1px solid dodgerblue;
+    color: white;
+    padding: 0.25rem 2rem;
+    border-radius: 10px;
+    font-weight: bold;
+    width: 100%;
+    height: 4rem;
+    margin-top: 0.5rem;
+}
+
+.form button:hover,
+.form button:active {
+    background-color: #1e6ad0;
+    border-color: #1e6ad0;
+}
+
+.form button:disabled {
+    background-color: #a9a9a975;
+    border-color: #a9a9a975;
+    cursor: default;
+}
+
+.form input.error, .form select.error {
+    background-color: #fce4e4;
+    border: 1px solid #cc0033;
+}
+
+.form-container.card {
+    padding: 20px 40px 20px 40px;
+}
+
+.parking-slot-container .card.form-container {
+    min-height: 38rem;
+}
+
+button.car-icon {
+    font: inherit;
+    cursor: pointer;
+    background-color: #ffffff;
+    border-radius: 15px;
+    font-weight: bold;
+    min-width: 8%;
+    height: 3rem;
+    display: flex;
+    justify-content: space-around;
+    transition: transform .1s;
+}
+
+button.car-icon:hover,
+button.car-icon:active {
+    transform: scale(1.1);
+}
+
+button.car-icon img {
+    height: 40px;
+    border-radius: 50%;
+}
+
+button.car-icon .quantity {
+    margin: 10px;
+    font-size: 20px;
+    font-weight: normal;
+}
+
+button.exit {
+    font: inherit;
+    cursor: pointer;
+    color: white;
+    border-radius: 25%;
+    border: 1px solid;
+    font-weight: bold;
+    width: 25px;
+    height: 25px;
+    padding: 0;
+    transition: transform .2s;
+}
+
+button.exit:hover {
+    transform: scale(1.5);
+}
+
+button.exit img{
+    height: 23px;
+    border-radius: 50%;
+}
+
+.input {
+    display: flex;
+    align-items: center;
+    margin-bottom: 1rem;
+    font-size: 20px;
+}
+
+.input label {
+    margin-right: 1rem;
+}
+
+.input input, .input select {
+    width: 20rem;
+    height: 4rem;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    font: inherit;
+    padding-left: 0.5rem;
+    margin-right: 2rem;
+}
+
+.input select {
+    width: 7rem;
+}
+
+.input-validation {
+    color: red;
+}
+
+.validation-row {
+    text-align: center;
+}
+
+.card {
+    padding: 1rem;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
+    border-radius: 14px;
+}
+
+.entry-point {
+    font-weight: bold;
+}
+
+.entry-point.entry-point-select {
+    font-size: 50px;
+    width: 100px;
+    height: 80px;
+}
+
+form .color-input {
+    width: 12rem;
+}
+
+.dot {
+    height: 25px;
+    width: 25px;
+    border-radius: 50%;
+    display: inline-block;
+}
+
+.red {
+    background-color: #ff0000a1;
+}
+
+.green {
+    background-color: #00a10099;
+}
+
+.button-container {
+    display: flex;
+    justify-content: center;
+    width: 12%;
+}
+
+.backdrop {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    z-index: 20;
+    background-color: rgba(0, 0, 0, 0.75);
+}
+
+.modal {
+    position: fixed;
+    top: 20vh;
+    left: 30%;
+    width: 40%;
+    background-color: white;
+    border-radius: 14px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
+    z-index: 30;
+    animation: slide-down 300ms ease-out forwards;
+}
+
+.modal .slip-header {
+    background: royalblue;
+    padding: 1rem;
+    border-radius: 14px 14px 0 0;
+}
+
+.modal .slip-header h2 {
+    margin: 0;
+    color: white;
+}
+
+.modal .slip-content {
+    padding: 1rem;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.modal .slip-content div {
+    min-width: 20%;
+    margin: 1rem;
+}
+
+.modal .slip-content div.date {
+    width: 100%;
+}
+
+.modal .slip-content div.fee {
+    min-width: 20%;
+    font-weight: bold;
+    font-size: 30px;
+}
+
+.modal .slip-actions {
+    padding: 1rem;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.modal button {
+    font: inherit;
+    border: 1px solid royalblue;
+    background: royalblue;
+    color: white;
+    padding: 0.25rem 1rem;
+    cursor: pointer;
+    height: 2.5rem;
+    width: 9rem;
+}
+
+.modal button:hover,
+.modal button:active {
+    background: #4e7fff;
+    border-color: #4e7fff;
+}
+
+.modal button:focus {
+    outline: none;
+}
+.loader-container {
+    margin-left: 45%;
+    margin-top: 100px;
+}
+
+.loader {
+    border: 16px solid #f3f3f3; /* Light grey */
+    border-top: 16px solid #3498db; /* Blue */
+    border-radius: 50%;
+    width: 120px;
+    height: 120px;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
 }
