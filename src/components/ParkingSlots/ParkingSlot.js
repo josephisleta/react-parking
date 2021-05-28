@@ -8,7 +8,7 @@ const ParkingSlot = (props) => {
     const parkingLotContext = useContext(ParkingLotContext);
 
     const exitHandler = () => {
-        parkingLotContext.exit(props.id);
+        parkingLotContext.exit(props.vehicle.plateNumber);
     };
 
     return (

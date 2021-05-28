@@ -11,10 +11,14 @@ const ParkingLotProvider = (props) => {
         fetch('http://joseph.local/api/parking?entryPoint=' + entryPoint).then((response) => {
             return response.json()
         }).then((data) => {
-            dispatchParkingSlotsState({
-                'type': 'UPDATE',
-                'data': data
-            });
+            if (!data.parkingSlots || !data.entryOrExitQuantity) {
+                setError('Parking lot settings are not yet set. Please contact the developer.');
+            } else {
+                dispatchParkingSlotsState({
+                    'type': 'UPDATE',
+                    'data': data
+                });
+            }
         }).catch((err) => {
             setError('Cannot get data from the API endpoint. Please contact the developer.');
         }).finally(() => {
@@ -22,7 +26,7 @@ const ParkingLotProvider = (props) => {
         });
     };
 
-    const fetchEnter = async (params) => {
+    const requestEnter = async (params) => {
         setIsLoading(true);
         const response = await fetch('http://joseph.local/api/parking/enter', {
             method: 'POST',
@@ -35,7 +39,7 @@ const ParkingLotProvider = (props) => {
         return await response.json();
     };
 
-    const fetchExit = async (params) => {
+    const requestExit = async (params) => {
         setIsLoading(true);
         const response = await fetch('http://joseph.local/api/parking/exit', {
             method: 'POST',
@@ -58,11 +62,11 @@ const ParkingLotProvider = (props) => {
         let response;
 
         if (action.type === 'ENTER') {
-            response = fetchEnter(action.data);
+            response = requestEnter(action.data);
         }
 
         if (action.type === 'EXIT') {
-            response = fetchExit(action.data);
+            response = requestExit(action.data);
             response.then((data) => {
                 if (data.parkingSlip) {
                     dispatchParkingSlipState({
@@ -141,11 +145,11 @@ const ParkingLotProvider = (props) => {
         });
     };
 
-    const exitHandler = (parkingSlotId) => {
+    const exitHandler = (plateNumber) => {
         dispatchParkingSlotsState({
             'type': 'EXIT',
             'data': {
-                'parkingSlotId': parkingSlotId
+                'plateNumber': plateNumber
             }
         });
     };
